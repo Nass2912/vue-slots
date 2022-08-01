@@ -1,43 +1,29 @@
 <template>
-  <AppForm>
-    <template v-slot:help>
-      <p> {{ help }}</p>
-    </template>
-    <template v-slot:fields>
-      <input type="text" placeholder="email">
-      <input type="text" placeholder="username">
-      <input type="password" placeholder="password">
-    </template>
-    <template v-slot:buttons>
-      <button type="submit">Submit</button>
-    </template>
-    <p>dummy</p>
-  </AppForm>
-  <AppForm>
-    <template v-slot:help>
-      <p>Contact</p>
-    </template>
-    <template v-slot:fields>
-      <input type="text" placeholder="name">
-      <input type="text" placeholder="message">
-    </template>
-    <template v-slot:buttons>
-      <button type="submit">Submit</button>
-    </template>
-  </AppForm>
+  <select v-model="componentName">
+    <option value="home">home</option>
+    <option value="about">about</option>
+  </select>
+
+  <KeepAlive>
+    <component :is="componentName" ></component>
+  </KeepAlive>
 </template>
 
 <script>
-  import AppForm from "./components/form.vue"
-  export default {
-    name: "App",
-    components: {
-      AppForm
-    },
-    data() {
-      return {
-        help: "Some Help Text"
-      }
+import Home from './components/Home.vue'
+import About from './components/About.vue'
+
+export default {
+  name: "App",
+  components: {
+    Home,
+    About
+  },
+
+  data () {
+    return {
+      componentName: "Home"
     }
   }
+}
 </script>
